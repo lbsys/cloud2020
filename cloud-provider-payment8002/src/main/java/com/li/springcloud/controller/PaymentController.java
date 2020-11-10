@@ -21,7 +21,6 @@ public class PaymentController {
 //    Java自带的依赖注入：import javax.annotation.Resource;
     @Resource
     private PaymentService paymentService;
-
     @Value(value = "${server.port}")
     private String serverPort;
 
@@ -34,7 +33,7 @@ public class PaymentController {
 
         if(result > 0)
         {
-            return new CommonResult(200,"插入数据库成功："+serverPort,result);
+            return new CommonResult(200,"插入数据库成功: "+serverPort,result);
         }else{
             return new CommonResult(444,"插入数据库失败:"+serverPort,null);
         }
