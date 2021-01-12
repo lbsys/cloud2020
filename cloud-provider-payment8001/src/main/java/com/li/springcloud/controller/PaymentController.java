@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
+import sun.nio.ch.DefaultSelectorProvider;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author: 一条IT
@@ -71,6 +73,20 @@ public class PaymentController {
         return this.discoveryClient;
     }
 
+    @GetMapping(value = "/payment/lb")
+    public String getPaymentLB(){
+        return serverPort;
+    }
+    @GetMapping("/payment/feign/timeout")
+    public String paymentFeignTimeOut(){
+        //暂停线程几秒钟
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return serverPort;
+    }
 
 
 }

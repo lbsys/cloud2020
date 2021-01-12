@@ -6,13 +6,13 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @Author: 一条IT
- * @Date: 2020/11/11 9:25
+ * @Date: 2020/11/11 10:00
  */
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class PaymentMain {
+public class OrderZkMain80 {
     public static void main(String[] args) {
-        SpringApplication.run(PaymentMain.class,args);
+        SpringApplication.run(OrderZkMain80.class,args);
     }
 }
