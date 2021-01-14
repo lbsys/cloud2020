@@ -1,0 +1,37 @@
+server:
+  port: 9527
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka
+  instance:
+    hostname: cloud-gateway-service
+    prefer-ip-address: true
+    instance-id: cloudgateway9527
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:                                     #多个路由，+s
+        - id: payment_route
+#          uri: http://localhost:8001
+          uri: lb://cloud-payment-service
+          predicates:
+            - Path=/payment/get/**          #注意是= P大写
+            - After=2021-01-13T21:48:42.113+08:00[Asia/Shanghai]
+
+        - id: payment_route2               #无特殊要求，但需要唯一
+          uri: lb://cloud-payment-service
+          predicates:
+            - Path=/payment/lb/**
+#            - After=2021-01-13T21:48:42.113+08:00[Asia/Shanghai]
+#            - Cookie=username,li               #curl http://localhost:9527/payment/lb --cookie "username=li"
+#            - Header=X-Request-Id,\d+          #curl http://localhost:9527/payment/lb -H "X-Request-Id:123"
+#            - Host=**.li.com                   #curl http://localhost:9527/payment/lb -H "Host:www.li.com"
