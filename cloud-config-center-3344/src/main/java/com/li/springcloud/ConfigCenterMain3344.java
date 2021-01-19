@@ -18,3 +18,13 @@ public class ConfigCenterMain3344 {
         SpringApplication.run(ConfigCenterMain3344 .class,args);
     }
 }
+
+//http://config-3344.com:3344/main/config-dev.yml
+
+//post请求  bus
+//curl -X POST "http://localhost:3344/actuator/bus-refresh"
+
+// 定点通知
+//curl-X POST "http://localhost:3344/actuator/bus-refresh/config-client:3355"
+
+//config-client:3355——>spring.application.name:server.port
